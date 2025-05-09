@@ -1,7 +1,8 @@
 import re
 from playwright.sync_api import expect
+import time
 
-from pages.commonHomework import CommonHomeworkPage
+from pages.AdminPanel.commonHomework import CommonHomeworkPage
 
 def test_goto_comment_homework_page(admin_login_page):
     mainPage = CommonHomeworkPage(admin_login_page)
@@ -18,7 +19,7 @@ def test_create_scheduling(admin_login_page):
     mainPage.search_by_homework_name("hd-test-假期作业")
     expect(mainPage.table._table).to_contain_text("hd-test-假期作业")
     mainPage.table.to_menu(0)
-    mainPage.page.settimeout(500)
+    time.sleep(1)
     mainPage.page.get_by_placeholder("请输入专题名称").fill("自由出题")
-    mainPage.page.settimeout(500)
+    time.sleep(1)
     mainPage.page.get_by_role("button",name="返回")
